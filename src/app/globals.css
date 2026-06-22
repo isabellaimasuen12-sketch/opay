@@ -1,26 +1,273 @@
-@import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #f5f7fa;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.container {
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.initials {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  background-color: #00b14f;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.initials h1 {
+  font-size: 2rem;
+}
+
+.greeting p {
+  color: gray;
+}
+
+.greeting h2 {
+  color: #1f2937;
+  margin-top: 5px;
+}
+
+.bell {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: #00b14f;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.balance-card {
+  background: linear-gradient(135deg, #00b14f, #009944);
+  color: white;
+  padding: 30px;
+  border-radius: 25px;
+  margin-bottom: 25px;
+}
+
+.balance-card p {
+  opacity: 0.9;
+  margin-bottom: 10px;
+}
+
+.balance-card h1 {
+  font-size: 2.5rem;
+}
+.balance-card h3{
+  margin-top: 20px;
+}
+.account{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.actions {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+#exp2{
+  color: red;
+}
+.actions button {
+  flex: 1;
+  border: none;
+  padding: 15px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.income-btn {
+  background-color: white;
+  color: #00b14f;
+}
+.income-btn:hover{
+  transform: translateY(2px);
+}
+.expense-btn {
+  background-color: white;
+  color: #00b14f;
+  border: 2px solid #00b14f;
+}
+
+/* Statistics */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.stat-card p {
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.stat-card h3 {
+  color: #00b14f;
+  font-size: 1.8rem;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .actions {
+    display: flex;
+  }
+  .stats {
+   display: flex;
+  }
+
+  .balance-card h1 {
+    font-size: 2rem;
+  }
+}
+.transactions{
+  margin-top:40px;
+  background:#fff;
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.transactions-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.transactions-header h2{
+  font-size:22px;
+}
+
+.transactions-header button{
+  border:none;
+  background:#eef4ff;
+  color:#3b82f6;
+  padding:8px 15px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.transaction-list{
+  display:flex;
+  flex-direction:column;
+  gap:15px;
+}
+
+.transaction-card{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px;
+  border-radius:15px;
+  background:#f8fafc;
+  transition:.3s;
+}
+
+.transaction-card:hover{
+  transform:translateY(-3px);
+  background:#eef4ff;
+}
+
+.transaction-icon{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#dbeafe;
+  color:#2563eb;
+  font-size:20px;
+}
+
+.transaction-details{
+  flex:1;
+  margin-left:15px;
+}
+
+.transaction-details h4{
+  margin-bottom:5px;
+  font-size:17px;
+}
+
+.transaction-details p{
+  color:#777;
+  text-transform:capitalize;
+  font-size:14px;
+}
+
+.transaction-amount{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.income{
+  color:#16a34a;
+}
+
+.expense{
+  color:#dc2626;
+}
+
+.empty-transactions{
+  text-align:center;
+  color:#888;
+  padding:40px 0;
+}
+
