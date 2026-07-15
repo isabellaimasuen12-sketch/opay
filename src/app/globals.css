@@ -3,17 +3,94 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  background-color: #f5f7fa;
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  font-family:Arial, Helvetica, sans-serif;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
 .container {
+  width: 100%;
+  max-width: 430px;
   min-height: 100vh;
+  margin: 0 auto;
   padding: 20px;
+  background: #f5f7fa;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+.transaction-form {
+  background: white;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
+.transaction-form h3 {
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.transaction-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.transaction-form label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.transaction-form input,
+.transaction-form textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  outline: none;
+  font-size: 15px;
+}
+
+.transaction-form input:focus,
+.transaction-form textarea:focus {
+  border-color: #00b14f;
+}
+
+.transaction-form textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+.transaction-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.transaction-form button[type="submit"] {
+  background: #00b14f;
+  color: white;
+}
+
+.transaction-form button[type="button"] {
+  background: #ef4444;
+  color: white;
+}
+
+#delete-icon{
+  color: red;
+  margin-left: 40px;
+  cursor: pointer;
+  font-size: 25px;
+}
 .dashboard {
   max-width: 1200px;
   margin: auto;
@@ -70,13 +147,36 @@ body {
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
+.balance-card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#00b14f,#009944);
+  border-radius:28px;
+  padding:28px;
+  color:white;
+  box-shadow:0 15px 35px rgba(0,177,79,.35);
+}
 
-.balance-card {
-  background: linear-gradient(135deg, #00b14f, #009944);
-  color: white;
-  padding: 30px;
-  border-radius: 25px;
-  margin-bottom: 25px;
+.balance-card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  top:-70px;
+  right:-40px;
+}
+
+.balance-card::after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  bottom:-40px;
+  left:-20px;
 }
 
 .balance-card p {
@@ -100,6 +200,7 @@ body {
   display: flex;
   gap: 15px;
   margin-bottom: 25px;
+  margin-top: 25px;
 }
 #exp2{
   color: red;
@@ -130,10 +231,19 @@ body {
   color: #00b14f;
   border: 2px solid #00b14f;
 }
+.income-icon{
+  background:#dcfce7;
+  color:#16a34a;
+}
+
+.expense-icon{
+  background:#fee2e2;
+  color:#dc2626;
+}
 
 /* Statistics */
 .stats {
-  display: grid;
+ display: flex;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
@@ -154,24 +264,116 @@ body {
   color: #00b14f;
   font-size: 1.8rem;
 }
-
+.transaction-amount{
+  margin-left: 20px;
+}
 /* Mobile */
 @media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 20px;
-    align-items: flex-start;
+
+  .container{
+    padding:15px;
   }
 
-  .actions {
-    display: flex;
+  /* Header */
+  .header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
   }
-  .stats {
+
+  .user-info{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex:1;
+  }
+
+  .initials{
+    width:55px;
+    height:55px;
+  }
+
+  .initials h1{
+    font-size:1.5rem;
+  }
+
+  .greeting p{
+    font-size:13px;
+  }
+
+  .greeting h2{
+    font-size:18px;
+  }
+
+  .bell{
+    width:50px;
+    height:50px;
+    font-size:1.6rem;
+    flex-shrink:0;
+  }
+
+  /* Balance Card */
+  .balance-card{
+    padding:20px;
+  }
+
+  .balance-card h1{
+    font-size:2rem;
+  }
+
+  .balance-card h3,
+  .balance-card h2{
+    font-size:14px;
+  }
+
+  /* Buttons */
+  .actions{
    display: flex;
+    gap:12px;
   }
 
-  .balance-card h1 {
-    font-size: 2rem;
+  .actions button{
+    width:100%;
+    height:50px;
+  }
+
+  /* Statistics */
+  .stats{
+    grid-template-columns:1fr;
+    gap:15px;
+  }
+
+  /* Transactions */
+  .transaction-card{
+    padding:12px;
+  }
+
+  .transaction-icon{
+    width:42px;
+    height:42px;
+    font-size:16px;
+  }
+
+  .transaction-details h4{
+    font-size:15px;
+  }
+
+  .transaction-details p{
+    font-size:12px;
+  }
+
+  .transaction-amount{
+    font-size:16px;
+  }
+
+  .transactions-header h2{
+    font-size:18px;
+  }
+
+  .transactions-header button{
+    font-size:13px;
+    padding:6px 12px;
   }
 }
 .transactions{
@@ -269,5 +471,18 @@ body {
   text-align:center;
   color:#888;
   padding:40px 0;
+}
+
+.balance-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.eye-icon{
+  cursor:pointer;
+  font-size:22px;
+  display:flex;
+  align-items:center;
 }
 
